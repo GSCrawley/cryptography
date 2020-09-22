@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageFont, ImageDraw  
 
 def decode_image(path_to_png):
     """
@@ -22,40 +22,49 @@ def decode_image(path_to_png):
             else:
                 pixels[x, y] = (255, 255, 255)
     # DO NOT MODIFY. Save the decoded image to disk:
-    decoded_image.save("decoded_image.png")
+    decoded_image.save("my_decoded_image.png")
+
+def write_text(size, text):
+  """
+  Writes a text in black to a white image and returns it.
+  """
+  img = Image.new('RGB', size, (255, 255, 255))
+  draw = ImageDraw.Draw(img)
+  font = ImageFont.truetype('/Library/Fonts/Arial.ttf')
+  draw.text((10,10), text, (0, 0, 0))
+  return img
 
 def encode_image(path_to_png):
-    """
-    TODO: Add docstring and complete implementation.
-    """
-    # raw_image = Image.open(path_to_png).convert("RGB")
-    # round_red_channel(raw_image)
-    # msg_image = Image.new("RGB",raw_image.size,(0,0,0))
+  """
+  TODO: Add docstring and complete implementation.
+  """
+  img = write_text((1000, 1000), 'hidden words revealed')
+  img.save(path_to_png)
 
-    # msg = ImageDraw.Draw(msg_image)
-    # msg.multiline_text((10,10), text_to_write, fill=(1,0,0))
-    # msg_image.save('Savedtext.png')
+encode_image("encoded.png")
 
-    # encoded_image = ImageChops.add(raw_image,msg_image)
-    # encoded_image.save('encoded_image.png')
 
 # def round_red_channel(image):
 #     '''
-    # Args:
-    #     image (PIl image file): realtive or absolute path to png
+#     Args:
+#         image (PIl image file): realtive or absolute path to png
     
-    # Returns:
-    #     image with all it's channel rounded down
+#     Returns:
+#         image with all it's channel rounded down
     
-    # Raises:
-    #     TypeError: arg image is not a PIL image file
-    # '''
-    # # pixels = image.load()
-    # # x_size, y_size = image.size
-    # # for i in range(0,x_size):
-    # #     for j in range(0, y_size):
-    # #         pixel = pixels[i,j]
-    # #         pixels[i,j] = (pixel[0] - pixel[0]%2,pixel[1],pixel[2])
+#     Raises:
+#         TypeError: arg image is not a PIL image file
+#     '''
+#     img = Image.open('myencode.png').convert('RGB')
+#     width, _ = img.size
+#     for i, px in enumerate(img.getdata()):
+#         if px[:3] == (255, 255, 255):
+#             y = i / width
+#             x = i % width
+#             img.putpixel((x, y), (255, 0, 0))
+
+#     img.save('myencode-red.png')
 
 if __name__ == '__main__':
-    decode_image('./encoded_sample.png')
+    decode_image('./myencode.png')
+   
