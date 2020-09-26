@@ -39,9 +39,9 @@ def encode_image(path_to_png):
   TODO: Add docstring and complete implementation.
   """
   img = write_text((1000, 1000), 'hidden words revealed')
-  img.save(path_to_png)
+  img.save("encoded.png")
 
-encode_image("encoded.png")
+encode_image("myencode.png")
 
 
 # def round_red_channel(image):
